@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  hello:
+    container_name: hello-service-2
+    image: hello:latest   # Image name for hello service
+    ports:
+      - "8001:8000"  # Port mapping for the new hello service
+    hostname: hello-2
+    restart: unless-stopped
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        order: start-first  # Ensures zero downtime during update
